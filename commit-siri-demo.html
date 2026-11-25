@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Commit’s Siri shortcuts · McHacks</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: Canvas;
+      color: CanvasText;
+      font: 1rem/1.55 system-ui, sans-serif;
+    }
+    main { width: min(100% - 2rem, 64rem); margin: 2rem auto 3rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.1; margin: 1.5rem 0 .75rem; }
+    h2 { font-size: 1.35rem; line-height: 1.25; margin: 0; }
+    p { margin: .65rem 0; }
+    .demos { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    section {
+      display: grid;
+      grid-template-rows: auto auto auto 1fr;
+      gap: .5rem;
+      padding: 1.25rem;
+      border: 1px solid color-mix(in srgb, CanvasText 22%, Canvas);
+      border-radius: 1rem;
+    }
+    section p { margin: 0; }
+    video {
+      display: block;
+      width: min(100%, 17rem);
+      height: auto;
+      aspect-ratio: 780 / 1696;
+      margin: .75rem auto 0;
+      border-radius: .8rem;
+      background: #151519;
+      align-self: start;
+    }
+    .adaptation video { aspect-ratio: 3 / 5; width: min(100%, 22rem); }
+    @media (min-width: 48rem) { .demos { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="index.html#demo-siri">Back to the presentation</a>
+    <h1>Commit’s Siri shortcuts</h1>
+    <p>Two recordings from the iPhone Simulator with a demo account. Siri sends each request to Commit from the Home Screen. The recordings use the Simulator’s Siri test input.</p>
+    <div class="demos">
+      <section aria-labelledby="workout">
+        <h2 id="workout">Read today’s workout</h2>
+        <p>“What’s today’s workout in Commit?”</p>
+        <p>Siri replies “The Upper-Body Forge,” and Commit shows the same workout.</p>
+        <video controls playsinline preload="none" poster="media/commit-siri-workout.jpg" aria-label="Recording of Siri reading today’s workout">
+          <source src="media/commit-siri-workout.mp4" type="video/mp4">
+          <a href="media/commit-siri-workout.mp4">Download the workout recording</a>
+        </video>
+      </section>
+      <section class="adaptation" aria-labelledby="soreness">
+        <h2 id="soreness">See today’s workout adjust</h2>
+        <p>“My legs are sore in Commit.”</p>
+        <p>Watch “The Squat Squad Workout,” the Siri request, and the giraffe check-in with Legs selected. The shortcut saves soreness. Commit’s workout rules then switch today to “The Upper-Body Forge” and move Legs + Glutes to next week.</p>
+        <video controls playsinline preload="none" poster="media/commit-siri-soreness.jpg" aria-label="Recording of the Siri check-in and the workout before and after it adjusts">
+          <source src="media/commit-siri-soreness.mp4" type="video/mp4">
+          <a href="media/commit-siri-soreness.mp4">Download the soreness recording</a>
+        </video>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
