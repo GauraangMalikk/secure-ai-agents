@@ -1306,6 +1306,16 @@ html[data-theme="dark"] .stage .inj-out.good { border-color: #72CCAE; }
   .lm-grid, .lm-grid.lm-five, .ck-grid, .audit-rgc, .rgc, .inj { grid-template-columns: minmax(0, 1fr); }
   .lm-card:not(:last-child)::after, .inj-arrow { display: none; }
 }
+/* 25 Nov 2026, as the new-developer talk did on 22 Nov (commit 1a02ebd): a slide is always 1200px wide, so it keeps its columns in any window */
+.stage .dc-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.stage .va-cards:not(.va-3) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stage .lm-grid.lm-five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.stage .audit-rgc { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.stage .ck-grid, .stage .owasp { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.stage .inj { grid-template-columns: minmax(0, 1.1fr) auto minmax(0, 1fr); }
+.stage .tri-ex { grid-template-columns: auto repeat(3, minmax(0, 1fr)); }
+.stage .lm-card:not(:last-child)::after, .stage .inj-arrow { display: block; }
+.stage .srcs { columns: 2; }
 
 /* title slide in the timed talk: the kiosk drawing, not the Commit phone */
 .dinner-route .stage .title-slide .cover-art.lec-cover { display: block !important; max-width: 560px; }
