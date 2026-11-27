@@ -1,0 +1,48 @@
+name: Reveal the answers after the lecture
+# 2 Dec 2026, 4:05 pm Minnesota (22:05 UTC), with two later tries in case GitHub skips a scheduled run.
+# Each run does nothing once the answers are up (reveal/ is gone), so next year's dates are harmless.
+on:
+  schedule:
+    - cron: "5 22 2 12 *"
+    - cron: "40 22 2 12 *"
+    - cron: "10 0 3 12 *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only check that the full page decrypts; change nothing"
+        type: boolean
+        default: true
+permissions:
+  contents: write
+  pages: write
+concurrency: reveal
+jobs:
+  reveal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Still hidden?
+        id: have
+        run: |
+          if [ -f reveal/full.html.enc ]; then echo "go=yes" >> "$GITHUB_OUTPUT"; else echo "The answers are already up."; echo "go=no" >> "$GITHUB_OUTPUT"; fi
+      - name: Decrypt the full page and check it
+        if: steps.have.outputs.go == 'yes'
+        env:
+          REVEAL_KEY: ${{ secrets.REVEAL_KEY }}
+        run: |
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -md sha256 -in reveal/full.html.enc -out full.html -pass env:REVEAL_KEY
+          echo "$(cat reveal/full.sha256)  full.html" | sha256sum -c -
+      - name: Publish the answers (never before 2 Dec 2026, 22:00 UTC)
+        if: steps.have.outputs.go == 'yes' && (github.event_name == 'schedule' || inputs.dry_run == false)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(date -u +%s)" -lt "$(date -u -d '2026-12-02T22:00:00Z' +%s)" ]; then echo "Too early: the answers go up on 2 Dec 2026 at 22:00 UTC."; exit 0; fi
+          mv full.html index.html
+          git rm -q -r reveal
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -q -m "Show the answers after the lecture"
+          git push -q
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
