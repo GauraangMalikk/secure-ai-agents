@@ -1338,6 +1338,11 @@ html[data-theme="dark"] .stage .inj-out.good { border-color: #72CCAE; }
 .stage-bar .passage-stage-open { display: none !important; }
 /* ---------- lecture Home (22 Nov 2026): new-developer layout, lecture content ---------- */
 #overview .lec-hero .sub { display: none; }
+/* the college and the date under his name: its own line on the Home hero and on the title slide (v47) */
+.hero .byline .lec-when { flex-basis: 100%; margin-top: 8px; color: var(--a-text); font-size: 15px; font-weight: 600; }
+.title-slide .byline .lec-when { margin-top: 14px; color: inherit; font-size: 1.125rem; font-weight: 600; }
+.hero .byline .lec-date { margin-top: 0; }
+.title-slide .byline .lec-date { margin-top: 2px; }
 .lec-cover { max-width: 560px; padding: 14px; }
 .lec-cover svg { display: block; width: 100%; height: auto; }
 .lec-parts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1504,6 +1509,26 @@ html[data-theme="dark"] .stage .teaching-svg .vx-green { fill: #12301d; }
 .rsp.rsp-tight li { font-size: 16px; }
 .rsp.rsp-tight h4 { margin-bottom: 4px; font-size: 15px; }
 @media (max-width: 760px) { .review-grid.st2 { grid-template-columns: minmax(0, 1fr); } }
+/* v48 UI pass (27 Nov 2026) */
+/* light slides: nothing stays black or dark grey */
+html[data-theme="light"] .stage .ds-chips li { background: #f5f5f7; border-color: #d2d2d7; }
+html[data-theme="light"] .stage .ds-layer { border-color: #d2d2d7; }
+html[data-theme="light"] .stage .ds-layer.l3 { border-color: #0a84ff; }
+html[data-theme="light"] .lecture-slide .cmd code, html[data-theme="light"] .lecture-slide .term { background: #f5f5f7; color: #1d1d1f; -webkit-text-fill-color: #1d1d1f; border: 1px solid #d2d2d7; }
+html[data-theme="light"] .lecture-slide .term span { color: #6e6e73; -webkit-text-fill-color: #6e6e73; }
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) .lecture-slide .cmd code, html:not([data-theme="dark"]) .lecture-slide .term { background: #f5f5f7; color: #1d1d1f; -webkit-text-fill-color: #1d1d1f; border: 1px solid #d2d2d7; }
+  html:not([data-theme="dark"]) .lecture-slide .term span { color: #6e6e73; -webkit-text-fill-color: #6e6e73; }
+}
+/* the faded pieces of the doorbell drawing stay readable on white */
+html[data-theme="light"] .stage .lv-svg g[opacity="0.36"] { opacity: .55; }
+/* no single word left alone on a line */
+.stage .section-slide > p, .stage .lm-line, .stage .lecture-slide header h3 { text-wrap: balance; }
+.stage .ask p, .stage .review-card p { text-wrap: pretty; }
+/* cards in a row line up part by part (subgrid): every title, text and takeaway line starts at the same height */
+.stage .review-grid.wg .review-card { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 6px; }
+.stage .review-grid.lc5 .review-card { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 6px; }
+.stage .lm-grid.lm-seven .lm-card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 5px; }
 </style>
 <header class="hero lec-hero" id="top">
         <div class="wrap">
@@ -1513,7 +1538,7 @@ html[data-theme="dark"] .stage .teaching-svg .vx-green { fill: #12301d; }
             <p class="lede">AI security and privacy for app and web developers. Follow one visitor who rings a doorbell built on a Raspberry Pi: seven places to protect, and a test for everything you build.</p><p class="answer-later home">The answers to the questions appear here after the lecture: Wednesday 2 December, 4 pm.</p>
             <div class="hero-cta"><button type="button" class="hero-btn" onclick="document.getElementById('present-start').click()"><span aria-hidden="true">🎤</span> Presentation</button><a class="hero-btn ghost" href="#lec-parts">Read the lecture <span aria-hidden="true">↓</span></a></div>
             <p class="sub">AI security and privacy for app and web development</p>
-            <div class="byline"><b>Gauraang Malik</b><span>PhD student, Building Engineering, Concordia · McGill Information Studies alum</span></div>
+            <div class="byline"><b>Gauraang Malik</b><span>PhD student, Building Engineering, Concordia · McGill Information Studies alum</span><span class="lec-when">College of Saint Benedict and Saint John’s University</span><span class="lec-when lec-date">Wednesday, 2 December 2026 · online</span></div>
           </div>
           <figure class="polaroid cover-art lec-cover"><svg xmlns="http://www.w3.org/2000/svg" class="teaching-svg lv-svg" viewBox="0 0 1000 330" role="img" aria-labelledby="lv-home-threat-t"><title id="lv-home-threat-t">Five kinds of attacker, someone at the door, your Wi-Fi, a swarm of AI bots, a bad library and steering text, point at a doorbell built on a Raspberry Pi, which holds visitors’ video, voices, the door lock and the keys.</title><style>.teaching-svg text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:var(--ink,#1d1d1f)}
 .vx-label{font-size:22px;font-weight:650}.vx-body{font-size:19px}.vx-small{font-size:17px;fill:var(--muted,#626267)}
@@ -5219,7 +5244,7 @@ html.presenting .gbar .spare-btn { display: none; }
     </div>
     <div class="sf-row">
       <div class="sf-notes">
-        <p>A guest lecture by Gauraang Malik for COMP 317H at CSB/SJU, built from his McHacks talk site.</p>
+        <p>A guest lecture by Gauraang Malik for COMP 317H at the College of Saint Benedict and Saint John’s University (CSB/SJU), Wednesday 2 December 2026, online. Built from his McHacks talk site.</p>
         <p>Commit is developed with Elovlo Inc. founder Daniela Suarez.</p>
         <p>Incidents and figures are cited on each slide and in the sources; claims that are allegations are labelled as reported.</p>
       </div>
@@ -5665,7 +5690,7 @@ html.presenting .gbar .spare-btn { display: none; }
   <p class="stage-presenter-status" id="stage-presenter-status" role="status" hidden></p>
   <aside class="stage-notes" id="stage-notes" aria-label="Speaker notes" hidden><p class="sn-h"><b>Notes</b> <span id="sn-title"></span><button type="button" id="sn-close" aria-label="Close the notes">×</button></p><ul id="sn-list"></ul></aside>
   <div class="stage-ov" id="stage-ov" role="dialog" aria-label="All slides" hidden></div>
-  <div class="stage-bar" id="stage-bar" title="Keys: → next · ← back · S presenter view · O overview · N notes · T stop the build timer · C copy the prompt · B blank · Esc leave"><button type="button" class="stage-time" id="stage-time" title="Time since you started presenting. Click to restart it.">0:00</button><span id="stage-build-slot"><button type="button" class="stage-time build" id="stage-build" title="Time since you copied the prompt. Click (or press T) to stop it; click again to hide it." hidden>⏱ 00:00</button></span><span class="stage-ch" id="stage-chapter"></span><span id="stage-pos">Slide 1</span><span class="bar-nav"><button type="button" id="stage-prev">Back</button><button type="button" id="stage-next">Next</button><select id="stage-jump" aria-label="Go to slide"></select><span id="stage-question-slot"><button type="button" id="stage-live" aria-pressed="false" hidden>Question off</button></span><button type="button" id="stage-fullscreen" aria-pressed="false">Fullscreen</button><button type="button" id="passage-dock-toggle" aria-pressed="false" hidden>App beside slides</button><button type="button" class="passage-stage-open" data-passage-open="concept" title="Concept illustrations first, then the recordings">Concepts</button><button type="button" id="stage-ov-btn" title="All slides (O)">Overview</button><button type="button" id="stage-notes-btn" aria-pressed="false" title="Speaker notes (N)">Notes</button><button type="button" id="stage-pres-btn" title="Open your notes, the next slide and the timers in a separate window (S)">Speaker view</button><button type="button" id="stage-exit">Leave</button></span></div>
+  <div class="stage-bar" id="stage-bar" title="Keys: → next · ← back · S presenter view · O overview · N notes · T stop the build timer · C copy the prompt · B blank · L light or dark · Esc leave"><button type="button" class="stage-time" id="stage-time" title="Time since you started presenting. Click to restart it.">0:00</button><span id="stage-build-slot"><button type="button" class="stage-time build" id="stage-build" title="Time since you copied the prompt. Click (or press T) to stop it; click again to hide it." hidden>⏱ 00:00</button></span><span class="stage-ch" id="stage-chapter"></span><span id="stage-pos">Slide 1</span><span class="bar-nav"><button type="button" id="stage-prev">Back</button><button type="button" id="stage-next">Next</button><select id="stage-jump" aria-label="Go to slide"></select><span id="stage-question-slot"><button type="button" id="stage-live" aria-pressed="false" hidden>Question off</button></span><button type="button" id="stage-fullscreen" aria-pressed="false">Fullscreen</button><button type="button" id="stage-theme">Light</button><button type="button" id="passage-dock-toggle" aria-pressed="false" hidden>App beside slides</button><button type="button" class="passage-stage-open" data-passage-open="concept" title="Concept illustrations first, then the recordings">Concepts</button><button type="button" id="stage-ov-btn" title="All slides (O)">Overview</button><button type="button" id="stage-notes-btn" aria-pressed="false" title="Speaker notes (N)">Notes</button><button type="button" id="stage-pres-btn" title="Open your notes, the next slide and the timers in a separate window (S)">Speaker view</button><button type="button" id="stage-exit">Leave</button></span></div>
 </div>
 
 <button class="vote-open" type="button" id="vote-open" hidden>
@@ -8994,9 +9019,9 @@ html[data-theme="dark"] .stage .teaching-svg .vx-badge{fill:#fff}
       idx.forEach(function (i) { var w = planWindow(deck[i].id); if (w) mins += (w[1] - w[0]) / 60000; });
       var label = SECTIONS[k][0], meta = idx.length + " slide" + (idx.length > 1 ? "s" : "") + (mins ? " · " + (Math.round(mins * 4) / 4) + " min" : "");
       var head = el("h3", "ov-sec");
-      head.appendChild(el("span", "", (k + 1) + " · " + label)); head.appendChild(el("small", "", meta));
+      head.appendChild(el("span", "", (k >= 1 && k <= 7 ? "Part " + k + " · " : "") + label)); head.appendChild(el("small", "", meta));
       var chip = el("button", "ov-chip");
-      chip.type = "button"; chip.appendChild(el("b", "", (k + 1) + " · " + label)); chip.appendChild(el("small", "", meta));
+      chip.type = "button"; chip.appendChild(el("b", "", (k >= 1 && k <= 7 ? "Part " + k + " · " : "") + label)); chip.appendChild(el("small", "", meta));
       chip.addEventListener("click", function () { head.scrollIntoView({ block: "start", behavior: "smooth" }); });
       nav.appendChild(chip);
       var grid = el("div", "ov-grid");
@@ -11256,6 +11281,40 @@ html.static-copy .live-qr, html.static-copy .ideas-qr { display: none !important
   if (pos) new MutationObserver(function () { if (backTo && jump.value === backTo) { backTo = null; back.hidden = true; } }).observe(pos, { characterData: true, childList: true, subtree: true });
   jump.addEventListener("change", function () { if (backTo && jump.value === backTo) { backTo = null; back.hidden = true; } });
   setTimeout(ticks, 0);
+})();
+</script>
+<script id="lecture-stage-theme">
+(function () {
+  var btn = document.getElementById("stage-theme"), root = document.documentElement, KEY = "mcgill-theme";
+  if (!btn) return;
+  function isDark() { // what the slides look like right now, whatever the system or the saved choice says
+    var el = document.getElementById("stage"), c = el ? getComputedStyle(el).backgroundColor.match(/[\d.]+/g) : null;
+    if (!c || (c.length > 3 && +c[3] === 0)) c = getComputedStyle(document.body).backgroundColor.match(/[\d.]+/g);
+    return !c || (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]) < 128;
+  }
+  function label() { var d = isDark(); btn.textContent = d ? "Light" : "Dark"; btn.title = (d ? "Light slides" : "Dark slides") + " (L)"; }
+  function set(t) {
+    var f = document.querySelector('[data-theme-set="' + t + '"]'); // the footer switch saves the choice and marks itself
+    if (f) f.click(); else { root.dataset.theme = t; try { localStorage.setItem(KEY, t); } catch (e) {} }
+    label();
+  }
+  function toggle() { set(isDark() ? "light" : "dark"); }
+  btn.addEventListener("click", function (e) { e.preventDefault(); toggle(); btn.blur(); });
+  document.addEventListener("keydown", function (e) {
+    if (!root.classList.contains("presenting") || e.metaKey || e.ctrlKey || e.altKey || (e.key !== "l" && e.key !== "L")) return;
+    var t = e.target; if (t && (t.isContentEditable || /^(input|textarea|select)$/i.test(t.tagName))) return;
+    e.preventDefault(); toggle();
+  });
+  window.addEventListener("storage", function (e) { // the speaker view is another window of this page: follow a switch made there
+    if (e.key !== KEY) return;
+    var t = e.newValue === "light" || e.newValue === "dark" ? e.newValue : "auto";
+    if (t === "auto") root.removeAttribute("data-theme"); else root.dataset.theme = t;
+    Array.prototype.forEach.call(document.querySelectorAll("[data-theme-set]"), function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-theme-set") === t ? "true" : "false"); });
+    label();
+  });
+  new MutationObserver(function () { setTimeout(label, 0); }).observe(root, { attributes: true, attributeFilter: ["data-theme", "class"] });
+  if (window.matchMedia) { var mq = matchMedia("(prefers-color-scheme: dark)"); if (mq.addEventListener) mq.addEventListener("change", label); }
+  label();
 })();
 </script>
 </body></html>
